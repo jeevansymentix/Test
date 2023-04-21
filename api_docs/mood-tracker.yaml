@@ -1,0 +1,168 @@
+paths:
+  /mood/create:
+    post:
+      tags:
+        - 'Mood-Tracker'
+      summary: 'Create Mood-Tracker'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: 'object'
+              properties:
+                whatyoufeel:
+                  type: string
+                howareyou:
+                  type: string
+                whyyoufeelthisway:
+                  type: string
+                  default: this is a long description
+                expressyourself:
+                  type: string
+              required:
+                - whatyoufeel
+                - howareyou
+                - whyyoufeelthisway
+                - expressyourself
+      responses:
+        '201':
+          description: 'Created successfully'
+          content:
+            application/json:
+              schema:
+                type: 'object'
+                properties:
+                  whatyoufeel:
+                    type: 'array'
+                    items:
+                      type: 'string'
+                  howareyou:
+                    type: 'string'
+                  whyyoufeelthisway:
+                    type: 'array'
+                    items:
+                      type: 'string'
+                  expressyourself:
+                    type: 'string'
+                  _id:
+                    type: 'string'
+                  __v:
+
+  /mood:
+    get:
+      tags:
+        - 'Mood-Tracker'
+      summary: Get all mood tracker records
+      responses:
+        200:
+          description: Fetched successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: boolean
+                  status:
+                    type: integer
+                  message:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        whatyoufeel:
+                          type: array
+                          items:
+                            type: string
+                        whyyoufeelthisway:
+                          type: array
+                          items:
+                            type: string
+                        _id:
+                          type: string
+                        howareyou:
+                          type: string
+                        expressyourself:
+                          type: string
+                        __v:
+                          type: integer
+  /mood/{_id}:
+    patch:
+      tags:
+        - 'Mood-Tracker'
+      parameters:
+        - in: path
+          name: _id
+          description: ID of the mood tracker entry to update
+          required: true
+          schema:
+            type: string
+      summary: 'Update Mood-Tracker'
+      description: ''
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: 'object'
+              properties:
+                whatyoufeel:
+                  type: string
+                howareyou:
+                  type: string
+                whyyoufeelthisway:
+                  type: string
+                  default: this is a long description
+                expressyourself:
+                  type: string
+              required:
+                - whatyoufeel
+                - howareyou
+                - whyyoufeelthisway
+                - expressyourself
+      responses:
+        '201':
+          description: 'Updated  successfully'
+          content:
+            application/json:
+              schema:
+                type: 'object'
+                properties:
+                  whatyoufeel:
+                    type: 'array'
+                    items:
+                      type: 'string'
+                  howareyou:
+                    type: 'string'
+                  whyyoufeelthisway:
+                    type: 'array'
+                    items:
+                      type: 'string'
+                  expressyourself:
+                    type: 'string'
+                  _id:
+                    type: 'string'
+                  __v:
+  /mood/delete/{_id}:
+    delete:
+      tags:
+        - 'Mood-Tracker'
+      summary: 'Delete moodTracker by By ID'
+      parameters:
+        - in: path
+          name: _id
+          schema:
+            type: string
+          required: true
+          example: 1
+      responses:
+        200:
+          description: Success
+          content:
+            application/json; charset=utf-8:
+              example:
+                status: 200
+                error: false
+                message: mood Tracker Record deleted
+                data: null
